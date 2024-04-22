@@ -1,12 +1,18 @@
-from __future__ import print_function
-import argparse
+import os
+from dotenv import load_dotenv
 
-parser = argparse.ArgumentParser(description='cmdArgs')
-parser.add_argument('--output', type=str, default='slack_data.csv',
-                help='filename to write analysis output in CSV format')
-parser.add_argument('--path', required=True, type=str, help='directory where slack data reside')
-parser.add_argument('--channel', type=str, default='', help='which channel we parsing')
-parser.add_argument('--userfile', type=str, default='users.json', help='users profile information')
+class DBConfig:
+    @staticmethod
+    def load():
+        load_dotenv()
+        return {
+            "DATABASE_NAME": os.getenv("DB_NAME"),
+            "DATABASE_USER": os.getenv("DB_USER"),
+            "DATABASE_PASSWORD": os.getenv("DB_PASSWORD"),
+            "DATABASE_HOST": os.getenv("DB_HOST"),
+            "DATABASE_PORT": os.getenv("DB_PORT")
+        }
 
-cfg = parser.parse_args()
-# print(cfg)
+# Usage:
+db_config = DBConfig.load()
+print(db_config)

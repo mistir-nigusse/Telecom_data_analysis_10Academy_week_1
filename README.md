@@ -1,21 +1,13 @@
 
-# Network Analysis Python Package
+# Telecom Data Analysis Python Package
 
 ## Overview
 
-This Python package, `network_analysis`, is designed for conducting network analysis task. It provides tools and utilities to analyze network data, with a focus on handling Slack messages from a previous 10 Academy training program.
+
 
 ## What to do
 
-Several code snippets have been provided to serve as a starting point for your project. However, it's essential to note that the code has not undergone thorough testing, and errors are expected. Your task is to identify and rectify errors, remove unnecessary components, and incorporate any missing elements.
 
-Consider this initial code as a foundation for your solution, but do not rely on it in its current state. It's provided to give you a starting point, but you should be prepared to modify and enhance it to meet the specific requirements of your system.
-
-As you commence your work, focus on exploring the dataset to gain a deep understanding of its structure and contents. Attempt to answer various intriguing questions that arise during your exploration.
-
-For guidance on the specific questions to address, refer to the notebooks/parse_slack_data.ipynb notebook, where you'll find empty cells designed for your responses. Utilize these cells to document your findings, insights, and any challenges encountered.
-
-Remember, this is an iterative process, and refining your code and analyses is a crucial part of the learning experience. Regularly post question on slack, and don't hesitate to reach out to tutors if you encounter difficulties. Best of luck with your exploration and analysis!
 
 ## Table of Contents
 
@@ -91,15 +83,15 @@ Now, your virtual environment is created and activated. You can install packages
 
 ### Clone this package
 
-To install the `network_analysis` package, follow these steps:
+To install the `Telecom_data_analysis` package, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/network_analysis.git
+    git clone https://github.com/your-username/Telecom_data_analysis_10Academy_week_1.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd network_analysis
+    cd Telecom_data_analysis_10Academy_week_1
     ```
  
 3. Install the required dependencies:
@@ -114,32 +106,17 @@ Please be aware that the existing requirements.txt file includes only a limited 
 Configure the package by modifying the `src/config.py` file. Adjust parameters such as file paths, API keys, or any other configuration settings relevant to your use case.
 
 ### Data Loading
-The package provides a data loader module (`loader.py`) in the src directory. Use this module to load your network data into a format suitable for analysis.
+The package provides a data loader module (`loader.py`) in the src directory. Use this module to load your telecom data into a format suitable for analysis.
 
 Example:
 
-```python
-from src.loader import DataLoader
-
-# Initialize DataLoader
-data_loader = DataLoader()
-
-# Load data from a Slack channel
-slack_data = data_loader.load_slack_data("path/to/slack_channel_data")
-```
 
 ## Utilities
 Explore the various utilities available in the `src/utils.py` module. This module contains functions for common tasks such as data cleaning, preprocessing, and analysis.
 
 Example:
 
-```python
-from src.utils import clean_data, visualize_network
 
-# Clean the loaded data
-cleaned_data = clean_data(slack_data)
-
-# Visualize the network
 visualize_network(cleaned_data)
 ```
 
