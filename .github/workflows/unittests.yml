@@ -1,0 +1,71 @@
+name: run-tests
+
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: read # required to checkout the code from the repo
+  
+on:
+  pull_request:
+    branches:
+    - unit-test
+  push:
+    branches:
+    - unit-test
+
+jobs:
+  Run-unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      #
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::070096167435:role/github_actions_role
+          aws-region: us-east-1   
+      #    
+      - name: Install python
+        run: sudo apt update && DEBIAN_FRONTEND=noninteractive sudo apt install -y python3
+      - name: Install pip
+        run: sudo apt install -y python3-pip
+
+      # Step 1: Setup kedro and credential file
+      - name: Retrieve Secret from AWS Secrets Manager
+        run: |
+          bash api/env_setup.sh
+
+      # Step 2: Install llpacker
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Install and authenticate with private package
+        env:
+          GITHUB_TOKEN: ${{ secrets.LLPACKER_GITHUB_ACCESS_TOKEN }}
+        run: |
+          pip install --upgrade pip
+          pip install git+ssh://git@github.com/10xac/llpacker.git
+
+      - name: Install requirements
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip3 install -r src/requirements.txt
+          echo "## Installed requirements successfully"
+
+      # Run test cases and generate JUnit XML report
+      - name: Run test cases and generate JUnit XML report
+        id: test
+        run: |
+          pytest src/tests --junitxml=report.xml
+          echo "::set-output name=report_path::report.xml"
+
+      # Upload JUnit XML report as an artifact
+      - name: Upload JUnit XML report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: ${{ steps.test.outputs.report_path }}

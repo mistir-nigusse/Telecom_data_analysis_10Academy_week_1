@@ -1,0 +1,35 @@
+name: Flake8 Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  flake8_check:
+    name: Check Flake8
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Check Flake8
+        run: |
+          flake8 src/ >> flake8_output.md
+          echo '### Hello world! ' >> $GITHUB_STEP_SUMMARY
+        continue-on-error: true
+
+      - name: Display Flake8 output using step summary
+        if: always()
+        run: |
+          cat flake8_output.md >> $GITHUB_STEP_SUMMARY

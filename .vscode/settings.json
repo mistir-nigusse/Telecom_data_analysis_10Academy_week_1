@@ -1,0 +1,38 @@
+{
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        },
+        "python3-repl": {
+            "path": "python3",
+            "args": ["-q"]
+        }
+    },
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {"source.organizeImports": true}    
+    },
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.pipenvPath": "${env:HOME}/.local/bin/pipenv",
+    "python.poetryPath": "${env:HOME}/.local/bin/poetry",
+    "python.condaPath": "${env:HOME}/.local/bin/conda",
+    "python.linting.banditPath": "${env:HOME}/.local/bin/bandit",
+    "python.linting.pylintPath": "${env:HOME}/.local/bin/pylint",
+    "python.linting.mypyPath": "${env:HOME}/.local/bin/mypy",
+    "python.linting.flake8Path": "${env:HOME}/.local/bin/flake8",
+    "python.formatting.blackPath": "${env:HOME}/.local/bin/black",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "black"
+}
