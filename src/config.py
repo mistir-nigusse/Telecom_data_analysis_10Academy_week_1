@@ -15,4 +15,3 @@ class DBConfig:
 
 # Usage:
 db_config = DBConfig.load()
-print(db_config)
