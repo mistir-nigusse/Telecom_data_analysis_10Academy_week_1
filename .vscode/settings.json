@@ -18,7 +18,9 @@
     },
     "[python]": {
         "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {"source.organizeImports": true}    
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }    
     },
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
