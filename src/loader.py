@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
-from config import DBConfig
+from .config import DBConfig
 class DataLoader:
     def __init__(self):
         pass
